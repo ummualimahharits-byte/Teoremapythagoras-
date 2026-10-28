@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="id"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pythagoras Quest: Petualangan di Negeri Geometria</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--cr:#FFF3D6;--rd:#E4572E;--yl:#FFC93C;--gn:#3FA34D;--og:#FF8C42;--ink:#4A2C12;--card:#FFFAEB;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--cr:#FFF3D6;--card:#FFFAEB;--ink:#4A2C12}}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%}
+body{font-family:'Baloo 2','Trebuchet MS',Verdana,sans-serif;color:var(--ink);background:var(--cr);font-size:18px;line-height:1.45}
+#bg{position:fixed;inset:0;width:100%;height:100%;z-index:-1}
+header{display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:10px 16px;background:var(--ink);color:var(--cr);font-weight:700}
+header .bar{flex:1;min-width:120px;height:14px;background:#7a5230;border-radius:9px;overflow:hidden}
+header .bar i{display:block;height:100%;background:var(--yl);transition:width .5s}
+main{max-width:860px;margin:0 auto;padding:16px}
+.card{background:var(--card);border:4px solid var(--ink);border-radius:22px;padding:20px;box-shadow:0 8px 0 var(--ink);animation:in .35s}
+@keyframes in{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+h1{font-size:clamp(2.2rem,8vw,4.2rem);line-height:1;margin:0;color:var(--rd);text-shadow:3px 3px 0 var(--yl),5px 5px 0 var(--ink);letter-spacing:1px}
+h2{margin:0 0 8px;font-size:1.7rem;color:var(--rd)}
+.btn{font:inherit;font-weight:800;font-size:1.15rem;padding:12px 26px;border:3px solid var(--ink);border-bottom-width:7px;border-radius:16px;background:var(--yl);color:var(--ink);cursor:pointer;transition:transform .12s}
+.btn:hover{transform:translateY(-3px)}.btn:active{transform:translateY(3px);border-bottom-width:3px}
+.btn.r{background:var(--rd);color:#fff}.btn.g{background:var(--gn);color:#fff}.btn.o{background:var(--og)}.btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.row{display:flex;gap:12px;flex-wrap:wrap;justify-content:space-between;align-items:center;margin-top:16px}
+.c{text-align:center}.opt{display:block;width:100%;margin:8px 0;text-align:left;background:#fff;font-weight:700}
+.opt.ok{background:#bdf0c2}.opt.no{background:#ffc2b0}
+input,select{font:inherit;font-size:1.1rem;padding:10px 14px;border:3px solid var(--ink);border-radius:12px;width:100%;background:#fff;color:var(--ink)}
+.f{margin:10px 0}.err{color:var(--rd);font-weight:800;min-height:1.4em}
+.fb{margin-top:12px;padding:12px 16px;border-radius:14px;border:3px solid var(--ink);animation:pop .5s}
+.fb.ok{background:#c9f2cd}.fb.no{background:#ffd6c7}
+@keyframes pop{0%{transform:scale(.8)}60%{transform:scale(1.05)}100%{transform:scale(1)}}
+.map{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.ms{border:4px solid var(--ink);border-radius:18px;padding:12px;background:#fff}.ms.lock{background:#e8dcc0;opacity:.75}.ms.done{background:#c9f2cd}
+.ms b{font-size:1.2rem}.ico{font-size:2.2rem}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}.tabs .btn{padding:6px 12px;font-size:.95rem;border-bottom-width:4px}
+.tabs .on{background:var(--rd);color:#fff}
+.fm{font-size:1.5rem;background:#fff;border:3px dashed var(--og);border-radius:14px;padding:10px;text-align:center;margin:10px 0;font-weight:800}
+svg.tri{display:block;margin:6px auto;max-width:300px;width:100%}
+.pz{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:center}
+.pz button{background:#fff;border:3px solid var(--ink);border-radius:12px;padding:6px;cursor:pointer}.pz button.sel{outline:5px solid var(--rd)}.pz button:disabled{opacity:.25}
+.slot{cursor:pointer}.slot:hover{opacity:.8}
+.big{font-size:2.6rem;font-weight:800;color:var(--rd)}
+.cols{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(160px,1fr))}.cols>div{background:#fff;border:3px solid var(--ink);border-radius:14px;padding:10px;text-align:center}
+:focus-visible{outline:4px solid var(--rd);outline-offset:2px}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media(max-width:520px){body{font-size:16px}.btn{padding:10px 16px}}
+</style></head><body>
+<svg id="bg" viewBox="0 0 800 500" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+<defs><linearGradient id="sk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFE9A8"/><stop offset="1" stop-color="#FFB86B"/></linearGradient></defs>
+<rect width="800" height="500" fill="url(#sk)"/><circle cx="650" cy="90" r="50" fill="#FFC93C"/>
+<polygon points="0,330 150,150 300,330" fill="#E4572E"/><polygon points="200,330 420,110 640,330" fill="#FF8C42"/><polygon points="520,330 680,170 800,300 800,330" fill="#E4572E"/>
+<g fill="#FFFAEB" stroke="#4A2C12" stroke-width="3"><rect x="380" y="130" width="80" height="60"/><rect x="370" y="105" width="22" height="85"/><rect x="448" y="105" width="22" height="85"/></g><polygon points="368,105 381,80 394,105" fill="#E4572E"/><polygon points="446,105 459,80 472,105" fill="#E4572E"/>
+<path d="M0 400 Q200 330 400 390 T800 380 V500 H0Z" fill="#3FA34D"/><path d="M0 450 Q250 400 520 450 T800 440 V500 H0Z" fill="#2E8B3E"/>
+<path d="M60 420 Q200 370 340 420" stroke="#4A2C12" stroke-width="10" fill="none"/><path d="M60 424 Q200 374 340 424" stroke="#FFC93C" stroke-width="5" fill="none"/>
+<g fill="#2E8B3E" stroke="#4A2C12" stroke-width="3"><circle cx="700" cy="410" r="30"/><circle cx="745" cy="425" r="24"/><circle cx="470" cy="420" r="22"/></g></svg>
+<div id="hd"></div><main id="app"></main>
+<script>
+const K='pq-v1',$=s=>document.querySelector(s),esc=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const fresh=()=>({scr:0,name:'',kelas:'',done:[],score:0,res:{}});
+let S;try{S=JSON.parse(localStorage.getItem(K))||fresh()}catch(e){S=fresh()}
+let fb=null,mi=0,pz={p:{},sel:null,msg:''};
+const save=()=>{try{localStorage.setItem(K,JSON.stringify(S))}catch(e){}};
+const go=n=>{S.scr=n;fb=null;pz={p:{},sel:null,msg:''};save();render();scrollTo(0,0)};
+// karakter
+const ch=(sh,hr,pt)=>`<svg viewBox="0 0 80 110" width="120" aria-hidden="true">${pt?'<circle cx="62" cy="30" r="9" fill="'+hr+'"/>':''}<rect x="22" y="56" width="36" height="38" rx="12" fill="${sh}" stroke="#4A2C12" stroke-width="3"/><rect x="26" y="92" width="10" height="14" fill="#4A2C12"/><rect x="44" y="92" width="10" height="14" fill="#4A2C12"/><circle cx="40" cy="34" r="22" fill="#F7C59F" stroke="#4A2C12" stroke-width="3"/><path d="M17 32 Q20 8 40 10 Q60 8 63 32 Q50 20 17 32Z" fill="${hr}" stroke="#4A2C12" stroke-width="3"/><circle cx="32" cy="38" r="3" fill="#4A2C12"/><circle cx="48" cy="38" r="3" fill="#4A2C12"/><path d="M32 47 Q40 54 48 47" stroke="#4A2C12" stroke-width="3" fill="none"/></svg>`;
+const duo=`<div class="c" style="display:flex;justify-content:center;gap:8px;align-items:end">${ch('#E4572E','#4A2C12')}${ch('#3FA34D','#B5651D',1)}</div>`;
+// segitiga siku-siku: la=alas, lb=tegak, lc=miring
+function tri(la,lb,lc,o,hl){const m=x=>o?260-x:x,A=m(60),B=m(200),C=m(60),r=o?-14:14,
+sd=(x1,y1,x2,y2,k)=>`<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${hl==k?'#E4572E':'#4A2C12'}" stroke-width="${hl==k?8:4}" stroke-linecap="round"/>`,
+t=(x,y,a,s)=>`<text x="${x}" y="${y}" text-anchor="${a}" font-size="19" font-weight="800" fill="#4A2C12">${s}</text>`;
+return `<svg class="tri" viewBox="0 0 260 200" role="img" aria-label="Segitiga siku-siku"><polygon points="${A},160 ${B},160 ${C},40" fill="#FFD966"/>${sd(A,160,B,160,'a')}${sd(A,160,C,40,'b')}${sd(B,160,C,40,'c')}<path d="M${A+r} 160 v-14 h${-r}" fill="none" stroke="#4A2C12" stroke-width="2.5"/>${t((A+B)/2,184,'middle',la)}${t(A+(o?14:-14),105,o?'start':'end',lb)}${t((B+C)/2+(o?-12:12),92,o?'end':'start',lc)}</svg>`}
+const sq=(x)=>`${x}²`;
+// ===== data misi =====
+const SD=['sisi siku-siku','sisi miring'];
+const MS={
+m1:{n:'Hutan Segitiga',ic:'🌲',d:'Kenali segitiga siku-siku dan sisi miringnya.',qs:[
+{t:'mc',q:'Perhatikan segitiga. Sisi mana yang merupakan sisi miring?',s:tri('a','b','c',0),o:['Sisi a','Sisi b','Sisi c'],a:2,w:'Sisi miring berada di depan sudut siku-siku dan selalu yang terpanjang. Di gambar, sisi c berhadapan dengan sudut siku-siku.'},
+{t:'mc',q:'Segitiga ini dibalik. Sisi mana yang merupakan sisi miring?',s:tri('K','M','L',1),o:['Sisi K','Sisi L','Sisi M'],a:1,w:'Sudut siku-siku ada di kanan bawah, di antara sisi K dan M. Sisi yang berhadapan dengannya adalah L, jadi L adalah sisi miring.'},
+{t:'mc',q:'Berapa besar sudut siku-siku?',o:['45°','60°','90°','180°'],a:2,w:'Sudut siku-siku besarnya 90°, seperti sudut pojok buku.'},
+{t:'sel',q:'Cocokkan nama sisi dengan posisinya.',s:tri('P','Q','R',0),items:[['P',0],['Q',0],['R',1]],w:'P dan Q membentuk sudut siku-siku, jadi keduanya sisi siku-siku. R berhadapan dengan sudut siku-siku, jadi R sisi miring.'},
+{t:'mc',q:'Jika c adalah sisi miring, rumus Pythagoras yang benar adalah ...',o:['a² + b² = c²','a² + c² = b²','a + b = c'],a:0,w:'Kuadrat sisi miring sama dengan jumlah kuadrat kedua sisi siku-siku: c² = a² + b².'}]},
+m2:{n:'Jembatan Pythagoras',ic:'🌉',d:'Hitung panjang jalur miring, tinggi, dan jarak mendatar.',qs:[
+{t:'num',q:'Raka menaiki tangga miring. Jarak mendatar 6 m dan tinggi 8 m. Berapa panjang tangga (m)?',s:tri('6 m','8 m','? m',0,'c'),a:10,w:'c² = 6² + 8² = 36 + 64 = 100, sehingga c = √100 = 10 m.'},
+{t:'num',q:'Jembatan tali: jarak mendatar 5 m dan tinggi 12 m. Berapa panjang tali miring (m)?',s:tri('5 m','12 m','? m',1,'c'),a:13,w:'c² = 5² + 12² = 25 + 144 = 169, sehingga c = √169 = 13 m.'},
+{t:'num',q:'Tangga 13 m bersandar pada dinding. Kaki tangga 5 m dari dinding. Berapa tinggi ujung tangga (m)?',s:tri('5 m','? m','13 m',0,'b'),a:12,w:'b² = c² − a² = 169 − 25 = 144, sehingga b = √144 = 12 m.'},
+{t:'num',q:'Jalur miring menuju kastel 17 m dan tingginya 8 m. Berapa jarak mendatarnya (m)?',s:tri('? m','8 m','17 m',0,'a'),a:15,w:'a² = c² − b² = 289 − 64 = 225, sehingga a = √225 = 15 m.'}]},
+m3:{n:'Gua Angka',ic:'🪨',d:'Selesaikan teka-teki hitungan Pythagoras.',qs:[
+{t:'mc',q:'Diketahui sisi miring c dan sisi siku-siku a. Rumus untuk mencari b adalah ...',o:['b = √(c² + a²)','b = √(c² − a²)','b = c − a'],a:1,w:'Dari c² = a² + b² diperoleh b² = c² − a², sehingga b = √(c² − a²).'},
+{t:'num',q:'Sisi siku-siku 9 cm dan 12 cm. Berapa sisi miringnya (cm)?',a:15,w:'c² = 81 + 144 = 225, sehingga c = 15 cm.'},
+{t:'num',q:'Sisi miring 26 cm dan satu sisi siku-siku 10 cm. Berapa sisi siku-siku yang lain (cm)?',a:24,w:'b² = 26² − 10² = 676 − 100 = 576, sehingga b = 24 cm.'},
+{t:'num',q:'Lengkapi langkah: c² = 8² + 15² = 64 + ... . Berapa angka yang hilang?',a:225,w:'15² = 225, sehingga c² = 64 + 225 = 289 dan c = 17.'},
+{t:'num',q:'Teka-teki: segitiga siku-siku punya sisi siku-siku 20 dan 21. Berapa sisi miringnya?',a:29,w:'c² = 400 + 441 = 841, dan 29 × 29 = 841, sehingga c = 29.'},
+{t:'mc',q:'Tiga bilangan manakah yang dapat menjadi sisi segitiga siku-siku?',o:['5, 6, 7','6, 8, 11','7, 24, 25','9, 12, 16'],a:2,w:'7² + 24² = 49 + 576 = 625 = 25². Pilihan lain tidak memenuhi c² = a² + b².'}]},
+m4:{n:'Kastel Geometria',ic:'🏰',d:'Susun kepingan puzzle menjadi segitiga siku-siku.',qs:[
+{t:'pz',q:'Susun tiga kepingan menjadi segitiga siku-siku. Klik satu kepingan, lalu klik tempatnya pada gambar.',w:'Tiga kepingan membentuk segitiga siku-siku dengan sisi tegak 6 cm dan sisi mendatar 8 cm.'},
+{t:'num',q:'Segitiga hasil puzzle memiliki sisi mendatar 8 cm dan sisi tegak 6 cm. Berapa sisi miringnya (cm)?',s:tri('8 cm','6 cm','? cm',0,'c'),a:10,w:'c² = 64 + 36 = 100, sehingga c = 10 cm.'},
+{t:'num',q:'Kepingan persegi panjang berukuran 4 cm × 3 cm. Berapa panjang diagonalnya (cm)?',a:5,w:'Diagonal = √(4² + 3²) = √25 = 5 cm.'}]},
+m5:{n:'Tantangan Akhir',ic:'👑',d:'10 soal evaluasi. Tunjukkan kemampuanmu!',qs:[
+{t:'mc',q:'Teorema Pythagoras berlaku pada ...',o:['Semua segitiga','Segitiga siku-siku','Segitiga sama sisi','Semua bangun datar'],a:1,w:'Teorema Pythagoras hanya berlaku pada segitiga siku-siku.'},
+{t:'mc',q:'Pada segitiga siku-siku dengan sisi miring c, pernyataan yang benar adalah ...',o:['c² = a² − b²','c² = a² + b²','c = a + b','a² = b² + c²'],a:1,w:'Rumusnya c² = a² + b².'},
+{t:'num',q:'Sisi siku-siku 5 cm dan 12 cm. Berapa sisi miringnya (cm)?',a:13,w:'c² = 25 + 144 = 169, sehingga c = 13 cm.'},
+{t:'num',q:'Sisi miring 25 cm dan satu sisi siku-siku 7 cm. Berapa sisi siku-siku yang lain (cm)?',a:24,w:'b² = 625 − 49 = 576, sehingga b = 24 cm.'},
+{t:'num',q:'Tangga 10 m bersandar pada dinding. Kaki tangga 6 m dari dinding. Berapa tinggi ujung tangga (m)?',a:8,w:'b² = 100 − 36 = 64, sehingga b = 8 m.'},
+{t:'mc',q:'Segitiga bersisi 9 cm, 12 cm, dan 15 cm adalah ...',o:['Siku-siku, karena 9² + 12² = 15²','Bukan siku-siku','Siku-siku, karena 9 + 12 > 15','Tidak bisa ditentukan'],a:0,w:'81 + 144 = 225 = 15², sehingga segitiga tersebut siku-siku.'},
+{t:'num',q:'Lapangan berbentuk persegi panjang 24 m × 7 m. Berapa panjang diagonalnya (m)?',a:25,w:'d² = 24² + 7² = 576 + 49 = 625, sehingga d = 25 m.'},
+{t:'num',q:'Kapal berlayar 12 km ke utara, lalu 16 km ke timur. Berapa jarak lurus dari titik awal (km)?',a:20,w:'Jalur utara dan timur saling tegak lurus. d² = 144 + 256 = 400, sehingga d = 20 km.'},
+{t:'mc',q:'Segitiga bersisi 8 cm, 10 cm, dan 12 cm adalah ...',o:['Siku-siku','Bukan siku-siku, karena 8² + 10² ≠ 12²','Siku-siku, karena 8 + 10 > 12'],a:1,w:'64 + 100 = 164, sedangkan 12² = 144. Hasilnya tidak sama, sehingga bukan segitiga siku-siku.'},
+{t:'num',q:'Diagonal persegi panjang 34 cm dan lebarnya 16 cm. Berapa panjangnya (cm)?',a:30,w:'p² = 34² − 16² = 1156 − 256 = 900, sehingga p = 30 cm.'}]}};
+const ORD=['cover','name','goal','how','materi','map','m1','m2','m3','m4','m5','result','review'];
+// ===== materi =====
+const MAT=[
+['Apa itu Teorema Pythagoras?',()=>`<p>Teorema Pythagoras menghubungkan ketiga sisi <b>segitiga siku-siku</b>, yaitu segitiga yang punya satu sudut 90°.</p>${tri('a','b','c',0)}<p>Teorema ini tidak berlaku pada segitiga yang tidak siku-siku.</p>`],
+['Sisi a, b, dan c',()=>`${tri('a','b','c',0,'c')}<p><b>a</b> dan <b>b</b> adalah sisi siku-siku, yaitu dua sisi yang membentuk sudut 90°. <b style="color:#E4572E">c</b> adalah sisi miring, yaitu sisi terpanjang yang berhadapan dengan sudut siku-siku.</p>`],
+['Rumus',()=>`<div class="fm">c² = a² + b²</div><p>Mencari sisi siku-siku jika sisi miring diketahui:</p><div class="fm">a = √(c² − b²)<br>b = √(c² − a²)</div>`],
+['Contoh hitungan',()=>`${tri('3 cm','4 cm','? cm',0,'c')}<div class="fm">c² = 3² + 4²<br>c² = 9 + 16 = 25<br>c = √25 = 5 cm</div>`],
+['Di kehidupan sehari-hari',()=>`<div class="cols"><div>🪜<br>Tangga bersandar di dinding</div><div>📺<br>Diagonal layar televisi</div><div>🛣️<br>Jalan pintas di lapangan</div><div>🪁<br>Tali layang-layang</div></div><p>Semua situasi ini membentuk segitiga siku-siku, sehingga panjangnya bisa dihitung dengan Teorema Pythagoras.</p>`]];
+// ===== layar =====
+const nav=(back,next,nl)=>`<div class="row">${back!=null?`<button class="btn o" data-go="${back}">◀ Kembali</button>`:'<span></span>'}${next!=null?`<button class="btn r" data-go="${next}">${nl}</button>`:''}</div>`;
+const V={
+cover:()=>`<div class="card c">${duo}<h1>PYTHAGORAS QUEST</h1><p style="font-size:1.4rem;font-weight:700">Petualangan di Negeri Geometria</p><p>Bantu Raka dan Nara menembus hutan, jembatan, dan gua hingga sampai ke kastel!</p><button class="btn r" style="font-size:1.4rem" data-go="${S.name?5:1}">${S.name?'LANJUTKAN PETUALANGAN':'MULAI PETUALANGAN'}</button></div>`,
+name:()=>`<div class="card"><h2>Kenali dirimu, petualang!</h2><div class="f"><label for="nm">Nama lengkap</label><input id="nm" maxlength="40" autocomplete="off" value="${esc(S.name)}"></div><div class="f"><label for="kl">Kelas</label><input id="kl" maxlength="10" placeholder="contoh: VIII A" value="${esc(S.kelas)}"></div><div class="err" id="er"></div>${nav(0,null)}<div class="c"><button class="btn r" data-act="name">LANJUTKAN PETUALANGAN</button></div></div>`,
+goal:()=>`<div class="card"><h2>Halo, ${esc(S.name)}! Ini tujuanmu</h2><div class="cols"><div>🔺<br>Memahami Teorema Pythagoras</div><div>📐<br>Mengenali sisi miring dan sisi siku-siku</div><div>✏️<br>Memakai rumus c² = a² + b²</div><div>🧮<br>Menghitung sisi yang belum diketahui</div><div>🏠<br>Memecahkan soal sehari-hari</div></div>${nav(1,3,'LANJUTKAN')}</div>`,
+how:()=>`<div class="card"><h2>Petunjuk permainan</h2><ol><li>Pelajari materi sebelum memulai misi.</li><li>Baca setiap pertanyaan dengan teliti.</li><li>Klik jawaban atau isi kolom jawaban.</li><li>Selesaikan misi secara berurutan.</li><li>Setiap jawaban benar memberi 10 poin; setiap misi selesai memberi bonus 20 poin.</li><li>Baca umpan balik setiap kali menjawab.</li><li>Selesaikan semua tantangan untuk mencapai kastel.</li></ol>${nav(2,4,'MULAI BELAJAR')}</div>`,
+materi:()=>{const[t,f]=MAT[mi];return `<div class="card"><h2>Materi penting sebelum petualangan</h2><div class="tabs">${MAT.map((x,i)=>`<button class="btn ${i==mi?'on':''}" data-act="tab" data-i="${i}">${i+1}. ${x[0]}</button>`).join('')}</div><h3 style="margin:4px 0">${t}</h3>${f()}<div class="row"><button class="btn o" ${mi?'':'disabled'} data-act="tab" data-i="${mi-1}">◀ Sebelumnya</button>${mi<4?`<button class="btn g" data-act="tab" data-i="${mi+1}">Berikutnya ▶</button>`:'<button class="btn r" data-go="5">LANJUT KE PETUALANGAN</button>'}</div><div class="row"><button class="btn o" data-go="3">◀ Kembali ke petunjuk</button></div></div>`},
+map:()=>{const all=S.done.length==5;return `<div class="card"><h2>Peta Negeri Geometria</h2><p>Skor game: <b>${S.score}</b>. Misi selesai: <b>${S.done.length}/5</b>.</p><div class="map">${[1,2,3,4,5].map(i=>{const M=MS['m'+i],dn=S.done.includes(i),op=i==1||S.done.includes(i-1);return `<div class="ms ${dn?'done':op?'':'lock'}"><span class="ico">${op?M.ic:'🔒'}</span> <b>Misi ${i}: ${M.n}</b><br>${M.d}<br><button class="btn ${dn?'g':'r'}" style="margin-top:8px" ${op?'':'disabled'} data-go="${5+i}">${dn?'Mainkan lagi ✓':op?'MULAI':'Terkunci'}</button></div>`}).join('')}</div>${nav(4,all?11:null,'LIHAT HASIL AKHIR')}</div>`},
+result:()=>{const R=S.res.m5||[],b=R.filter(x=>x.ok).length,p=Math.round(b/10*100),msg=p>=80?'Luar biasa! Kamu menguasai Teorema Pythagoras.':p>=60?'Bagus! Sedikit latihan lagi dan kamu akan mahir.':'Jangan menyerah! Baca materi dan pembahasan, lalu coba lagi.';
+return `<div class="card c">${duo}<h2>Hasil akhir petualangan</h2><p><b>${esc(S.name)}</b> (${esc(S.kelas)})</p><div class="cols"><div>Total skor game<div class="big">${S.score}</div></div><div>Nilai evaluasi<div class="big">${p}%</div></div><div>Benar / Salah<div class="big">${b} / ${R.length-b}</div></div></div><p>Misi selesai: <b>${S.done.length}/5</b>. Skor game mencakup bonus misi, sedangkan nilai evaluasi hanya dari Tantangan Akhir.</p><p style="font-weight:700">${msg}</p><div class="row" style="justify-content:center"><button class="btn g" data-go="12">LIHAT PEMBAHASAN</button><button class="btn r" data-act="reset">ULANGI PERMAINAN</button></div></div>`},
+review:()=>`<div class="card"><h2>Pembahasan Tantangan Akhir</h2>${MS.m5.qs.map((q,i)=>{const r=(S.res.m5||[])[i];return `<div class="fb ${r&&r.ok?'ok':'no'}" style="animation:none;margin-bottom:10px"><b>${i+1}. ${q.q}</b><br>Jawabanmu: ${r?esc(r.u):'-'} ${r&&r.ok?'✔':'✘'}<br>Jawaban benar: <b>${q.t=='mc'?q.o[q.a]:q.a}</b><br>${q.w}</div>`}).join('')}${nav(11,null)}</div>`
+};
+// ===== misi =====
+function mission(k){const m='m'+k,M=MS[m];S.res[m]=S.res[m]||[];const R=S.res[m],cur=fb?R.length-1:R.length;
+if(cur>=M.qs.length){if(!S.done.includes(k)){S.done.push(k);S.score+=20;save()}const b=R.filter(x=>x.ok).length;
+return `<div class="card c"><div class="big">🎉</div><h2>Misi ${k} selesai!</h2><p>Benar ${b} dari ${M.qs.length}. Bonus misi +20 poin.</p><button class="btn r" data-go="${k==5?11:5}">${k==5?'LIHAT HASIL AKHIR':'KEMBALI KE PETA'}</button></div>`}
+const q=M.qs[cur];let body='';
+if(q.t=='mc')body=q.o.map((o,i)=>`<button class="btn opt ${fb?(i==q.a?'ok':R[cur].i===i?'no':''):''}" ${fb?'disabled':''} data-act="mc" data-i="${i}">${String.fromCharCode(65+i)}. ${o}</button>`).join('');
+else if(q.t=='num')body=`<div class="f"><input id="an" inputmode="decimal" placeholder="Tulis jawaban angka" ${fb?'disabled':''} value="${fb?esc(R[cur].u):''}"></div>${fb?'':'<button class="btn g" data-act="num">PERIKSA JAWABAN</button>'}`;
+else if(q.t=='sel')body=q.items.map((it,i)=>`<div class="f">Sisi <b>${it[0]}</b>: <select id="s${i}" ${fb?'disabled':''}><option value="">Pilih...</option>${SD.map((s,j)=>`<option value="${j}">${s}</option>`).join('')}</select></div>`).join('')+(fb?'':'<button class="btn g" data-act="sel">PERIKSA JAWABAN</button>');
+else body=puzzle(fb);
+return `<div class="card"><h2>${M.ic} Misi ${k}: ${M.n}</h2><p><b>Soal ${cur+1} dari ${M.qs.length}</b> · Skor ${S.score}</p><p>${q.q}</p>${q.s||''}${body}<div class="err" id="er"></div>${fb?`<div class="fb ${fb.ok?'ok':'no'}"><b>${fb.ok?'⭐ Benar! +10 poin.':'Belum tepat.'}</b> ${q.w}</div><div class="row"><span></span><button class="btn r" data-act="next">LANJUT ▶</button></div>`:''}<div class="row"><button class="btn o" data-go="5">◀ Kembali ke peta</button></div></div>`}
+// puzzle: segitiga 8x6 dipotong jadi segitiga kecil, persegi panjang 4x3, segitiga kecil
+const U=34,SL=[{k:'T',p:[[0,3],[4,3],[0,6]]},{k:'R',p:[[0,0],[4,0],[4,3],[0,3]]},{k:'T',p:[[4,0],[8,0],[4,3]]}],
+PC=[{k:'T',c:'#FF8C42',p:[[0,0],[4,0],[0,3]]},{k:'R',c:'#FFC93C',p:[[0,0],[4,0],[4,3],[0,3]]},{k:'T',c:'#3FA34D',p:[[0,0],[4,0],[0,3]]}];
+const pts=(p,ox,oy,h)=>p.map(v=>`${ox+v[0]*U},${oy+h-v[1]*U}`).join(' ');
+function puzzle(done){const used=Object.values(pz.p);
+const slots=SL.map((s,i)=>{const pc=pz.p[i];return `<polygon class="slot" data-act="slot" data-i="${i}" points="${pts(s.p,10,5,6*U)}" fill="${pc!=null?PC[pc].c:'#fff6'}" stroke="#4A2C12" stroke-width="3" ${pc!=null?'':'stroke-dasharray="7 5"'}/>`}).join('');
+const tray=PC.map((c,i)=>`<button data-act="piece" data-i="${i}" class="${pz.sel===i?'sel':''}" ${used.includes(i)||done?'disabled':''} aria-label="Kepingan ${i+1}"><svg width="${4*U+10}" height="${(c.k=='R'?3:3)*U+10}"><polygon points="${pts(c.p,5,5,3*U)}" fill="${c.c}" stroke="#4A2C12" stroke-width="3"/><text x="${2*U+5}" y="${3*U+2}" text-anchor="middle" font-size="14" font-weight="800">4 cm</text><text x="12" y="${1.5*U+6}" font-size="14" font-weight="800">3 cm</text></svg></button>`).join('');
+return `<svg class="tri" viewBox="0 0 ${8*U+20} ${6*U+10}" style="max-width:340px" aria-label="Area susun puzzle">${slots}<text x="${4*U}" y="${6*U+2}" text-anchor="middle" font-size="14" font-weight="800">8 cm</text></svg><div class="pz">${tray}</div><div class="err">${pz.msg}</div>`}
+// ===== jawaban =====
+function fin(m,ok,u,i){const R=S.res[m];R.push({ok,u,i});if(ok)S.score+=10;fb={ok};save();render()}
+const curQ=()=>{const m='m'+(S.scr-5),R=S.res[m];return [m,MS[m].qs[R.length]]};
+document.addEventListener('click',e=>{const el=e.target.closest('[data-go],[data-act]');if(!el)return;
+if(el.dataset.go!=null)return go(+el.dataset.go);
+const a=el.dataset.act,i=+el.dataset.i,er=$('#er');
+if(a=='name'){const n=$('#nm').value.trim(),k=$('#kl').value.trim();if(!n||!k){er.textContent='Isi nama lengkap dan kelas terlebih dahulu.';return}S.name=n;S.kelas=k;return go(2)}
+if(a=='tab'){mi=i;return render()}
+if(a=='reset'||a=='hard'){if(a=='hard'&&!confirm('Hapus semua progres dan mulai dari awal?'))return;S=fresh();mi=0;pz={p:{},sel:null,msg:''};try{localStorage.removeItem(K)}catch(x){}return go(0)}
+if(a=='next'){fb=null;return render()}
+if(a=='mc'){const[m,q]=curQ();return fin(m,i==q.a,q.o[i],i)}
+if(a=='num'){const[m,q]=curQ(),v=$('#an').value.trim().replace(',','.');if(v===''||isNaN(v)){er.textContent='Tulis jawaban berupa angka.';return}return fin(m,Math.abs(+v-q.a)<1e-9,v)}
+if(a=='sel'){const[m,q]=curQ(),v=q.items.map((x,j)=>$('#s'+j).value);if(v.includes('')){er.textContent='Pilih jawaban untuk semua sisi.';return}return fin(m,q.items.every((x,j)=>+v[j]==x[1]),q.items.map((x,j)=>x[0]+'='+SD[v[j]]).join(', '))}
+if(a=='piece'){pz.sel=i;pz.msg='Sekarang klik tempat kepingan pada gambar.';return render()}
+if(a=='slot'){if(pz.sel==null){pz.msg='Pilih kepingan dulu di bawah gambar.';return render()}if(pz.p[i]!=null)return;
+if(PC[pz.sel].k!=SL[i].k){pz.msg='Bentuknya belum cocok dengan tempat ini. Coba tempat lain.';return render()}
+pz.p[i]=pz.sel;pz.sel=null;pz.msg='Pas!';if(Object.keys(pz.p).length==3){return fin('m4',true,'Puzzle selesai')}return render()}
+});
+// ===== render =====
+function render(){const id=ORD[S.scr];
+$('#hd').innerHTML=S.scr>=2?`<header><span>🧭 ${esc(S.name)}</span><span>⭐ ${S.score}</span><div class="bar" title="Progres"><i style="width:${S.done.length*20}%"></i></div><span>${S.done.length}/5</span><button class="btn o" style="padding:4px 12px;border-bottom-width:4px;font-size:.9rem" data-act="hard">↺ Mulai ulang</button></header>`:'';
+$('#app').innerHTML=S.scr>=6&&S.scr<=10?mission(S.scr-5):V[id]();}
+if(S.scr>=2&&!S.name)S.scr=0;render();
+</script></body></html>
